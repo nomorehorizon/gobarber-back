@@ -32,7 +32,7 @@ export default class AuthenticateUserService {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError('Email/Password does not match.', 401);
+      throw new AppError('Incorrect email/Password does not match.', 401);
     }
 
     const passwordMatched = await this.hashProvider.compareHash(
@@ -41,7 +41,7 @@ export default class AuthenticateUserService {
     );
 
     if (!passwordMatched) {
-      throw new AppError('Email/Password does not match.', 401);
+      throw new AppError('Incorrect email/Password does not match.', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
