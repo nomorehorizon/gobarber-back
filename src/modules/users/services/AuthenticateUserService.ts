@@ -24,8 +24,8 @@ export default class AuthenticateUserService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    // @inject('HashProvider')
-    // private hashProvider: IHashProvider,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({ email, password }: IRequestDTO): Promise<IResponse> {
@@ -35,14 +35,14 @@ export default class AuthenticateUserService {
       throw new AppError('Email/Password does not match.', 401);
     }
 
-    // const passwordMatched = await this.hashProvider.compareHash(
-    //   password,
-    //   user.password,
-    // );
+    const passwordMatched = await this.hashProvider.compareHash(
+      password,
+      user.password,
+    );
 
-    // if (!passwordMatched) {
-    //   throw new AppError('Email/Password does not match.', 401);
-    // }
+    if (!passwordMatched) {
+      throw new AppError('Email/Password does not match.', 401);
+    }
 
     const { secret, expiresIn } = authConfig.jwt;
 

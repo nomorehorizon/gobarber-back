@@ -10,8 +10,6 @@ appointmentsRouter.use(ensureAuthenticated);
 
 // ROTA GET
 // appointmentsRouter.get('/', async (req, res) => {
-//   console.log(req.user);
-
 //   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 //   const appointments = await appointmentsRepository.find();
 
